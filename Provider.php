@@ -43,9 +43,9 @@ class Provider extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    protected function getUserByToken($token)
+    protected function getUserByToken($token, $user_id)
     {
-        $endpoint = '/users/self';
+        /*$endpoint = '/users/self';
         $query = [
             'access_token' => $token,
         ];
@@ -60,6 +60,17 @@ class Provider extends AbstractProvider
             ],
         ]);
 
+        return json_decode($response->getBody()->getContents(), true)['data'];*/
+
+        $response = $this->getHttpClient()->get(
+            'https://graph.instagram.com/'.$user_id, [
+            'query'   => [
+                'access_token' => $token
+            ],
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+        ]);
         return json_decode($response->getBody()->getContents(), true)['data'];
     }
 
