@@ -63,7 +63,7 @@ class Provider extends AbstractProvider
         return json_decode($response->getBody()->getContents(), true)['data'];*/
 
         $response = $this->getHttpClient()->get(
-            'https://graph.instagram.com/'.$user_id, [
+            'https://graph.instagram.com/me', [
             'query'   => [
                 'access_token' => $token
             ],
