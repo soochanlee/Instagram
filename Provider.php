@@ -43,7 +43,7 @@ class Provider extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    protected function getUserByToken($token, $user_id)
+    protected function getUserByToken($token)
     {
         /*$endpoint = '/users/self';
         $query = [
