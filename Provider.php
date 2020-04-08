@@ -65,13 +65,14 @@ class Provider extends AbstractProvider
         $response = $this->getHttpClient()->get(
             'https://graph.instagram.com/me', [
             'query'   => [
-                'access_token' => $token
+                'access_token' => $token,
+                'fields' => 'id, username',
             ],
             'headers' => [
                 'Accept' => 'application/json',
             ],
         ]);
-        return json_decode($response->getBody()->getContents(), true)['data'];
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
@@ -80,9 +81,8 @@ class Provider extends AbstractProvider
     protected function mapUserToObject(array $user)
     {
         return (new User())->setRaw($user)->map([
-            'id'     => $user['id'], 'nickname' => $user['username'],
-            'name'   => $user['full_name'], 'email' => null,
-            'avatar' => $user['profile_picture'],
+            'id'     => $user['id'],
+            'name'   => $user['username'],
         ]);
     }
 
